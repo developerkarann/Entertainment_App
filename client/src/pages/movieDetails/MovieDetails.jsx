@@ -17,8 +17,6 @@ const MovieDetails = () => {
     dispatch(searchMovie({id,token}))
   }, [])
 
-  console.log(data[0])
-
   return (
     <>
       {

@@ -13,9 +13,6 @@ const LoginPage = () => {
     const password = e.target.password.value
     try {
       const result = await dispatch(loginUser({ email, password })).unwrap();
-      //  console.log(result)
-      // dispatch(setCredentials({ token, user }))
-      console.log('[UI] Login Result ✅', result);
       alert('Login Successful!')
     } catch (error) {
       console.log('[UI] Login Error ❌', error);

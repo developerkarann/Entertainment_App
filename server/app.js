@@ -14,9 +14,9 @@ app.use(express.json())
 app.use(cookieParser())
 
 
-app.use('/', userRoutes)
-app.use('/', moviesRoutes)
-app.use('/', seriesRoutes)
+app.use('/api', userRoutes)
+app.use('/api', moviesRoutes)
+app.use('/api', seriesRoutes)
 
 
 module.exports = app

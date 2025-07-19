@@ -17,8 +17,6 @@ const SeriesDetails = () => {
     dispatch(searchSeries({ id, token }))
   }, [])
 
-  console.log(data[0])
-
   return (
     <>
       {
