@@ -7,7 +7,7 @@ const seriesRoutes = require('./routes/seriesRoute')
 const cookieParser = require('cookie-parser')
 
 app.use(cors({
-    origin: 'http://localhost:5173', // your frontend domain
+    origin: process.env.CLIENT_SERVER, // your frontend domain
     credentials: true
 }))
 app.use(express.json())
