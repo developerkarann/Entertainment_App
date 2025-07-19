@@ -53,10 +53,10 @@ exports.loginUser = async (req, res) => {
 
     const payload = { userId: user.id, username: user.email }
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' })
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' })
 
     const options = {
-        maxAge: 60 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 1000,
         // path: '/',
         // sameSite: 'none',
         // secure: true
