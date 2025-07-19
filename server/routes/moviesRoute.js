@@ -4,7 +4,7 @@ const authentication = require('../middleware/authentication');
 const router = express.Router();
 
 
-router.route('/getmovies').get(authentication, getMovies)
+router.route('/getmovies').get( authentication ,getMovies)
 
 router.route('/movie/:id').get(authentication, findMovie)
 

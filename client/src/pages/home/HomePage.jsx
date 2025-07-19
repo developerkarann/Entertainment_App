@@ -1,16 +1,11 @@
-import { FaBookmark, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
-import Sidebar from "../../components/Sidebar";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
-import { useDispatch, useSelector } from 'react-redux'
-import { decrement, increment } from "../../redux/slices/counterSlice";
+import Sidebar from "../../components/Sidebar";
 import { fetchMovies } from "../../redux/slices/moviesslice";
-import axios from "axios";
-import { fetchSeries } from "../../redux/slices/seriesSlice";
-import { searchMovie } from "../../redux/slices/searchMovieSlice";
-import { searchSeries } from "../../redux/slices/searchSeriesSlice";
 
 const HomePage = () => {
     const moviesData = useSelector((state) => state.movies.data)

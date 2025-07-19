@@ -11,9 +11,13 @@ const initialState = {
 
 export const fetchMovies = createAsyncThunk('fetchmovies', async (token) => {
     let resData = []
+    console.log(token)
+    if(!token){
+        return console.log('[Error]: Token is undefined')
+    }
     const response = await axios.get(`${server}/getmovies`, {
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
         },
     })
         .then((res) => {

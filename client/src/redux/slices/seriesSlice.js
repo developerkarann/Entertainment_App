@@ -12,7 +12,7 @@ export const fetchSeries = createAsyncThunk('fetchseries', async (token) => {
     let resData = []
     const response = await axios.get(`${server}/getseries`, {
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
         },
     })
         .then((res) => {

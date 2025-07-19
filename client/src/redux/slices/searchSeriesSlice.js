@@ -14,7 +14,7 @@ export const searchSeries = createAsyncThunk('searchSeries', async ({id,token}) 
     let series = []
     const response = await axios.get(`${server}/series/${id}`, {
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
         },
     })
         .then((res) => {

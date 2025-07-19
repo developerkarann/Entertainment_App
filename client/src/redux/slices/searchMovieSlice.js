@@ -14,7 +14,7 @@ export const searchMovie = createAsyncThunk('serachmovie', async ({id, token}) =
     let movie = []
     const response = await axios.get(`${server}/movie/${id}`, {
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
         },
     })
         .then((res) => {
