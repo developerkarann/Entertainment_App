@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { FaBookmark, FaSearch } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { toggleBookmark } from '../redux/slices/bookmarkSlice';
+// import { setBookmark } from '../redux/slices/bookmarksSlice';
+// import { toggleBookmark } from '../redux/slices/bookmarkSlice';
+import axios from 'axios';
 
 const Card = ({ data }) => {
-
+    const token = useSelector((state) => state.auth.token);
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -14,21 +16,26 @@ const Card = ({ data }) => {
     const lastSegment = pathSegments[pathSegments.length - 1];
 
 
-    const handleBookMark = () => {
-        dispatch(toggleBookmark({
-            id: data.id,
-            title: data.title,
-            imageSet: {
-                horizontalPoster: { w360: data.imageSet.horizontalPoster.w360 }
-            },
-            type: data.type
-        }))
-        if (lastSegment === 'bookmark') {
-            alert('Deleted from bookmark')
-            window.location.reload()
-        } else {
-            alert('Added to bookmark')
+    const handleBookMark = async () => {
+
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_SERVER}/bookmark`, {
+                movieId: data.id,
+                title: data.title,
+                image: data.imageSet.horizontalPoster.w360,
+                type: data.type
+            }, {
+                headers: {
+                    Authorization: `${token}`,
+                },
+            })
+            const {message} = response.data
+            alert(message)
+            // console.log('sucess: ', response.data)
+        } catch (error) {
+            console.log('Error:', error.message)
         }
+
     }
 
     return (

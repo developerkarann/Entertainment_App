@@ -11,7 +11,7 @@ const initialState = {
 
 export const fetchMovies = createAsyncThunk('fetchmovies', async (token) => {
     let resData = []
-    console.log(token)
+    // console.log(token)
     if(!token){
         return console.log('[Error]: Token is undefined')
     }

@@ -1,19 +1,64 @@
 import { FaBookmark, FaSearch } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import { useEffect, useState } from "react";
-import Card from "../../components/Card";
 import EmptyBookmark from "../../components/EmptyBookmark";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBookmarks } from "../../redux/slices/bookmarksSlice";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const BookmarkPage = () => {
 
-    const bookmarkData = JSON.parse(localStorage.getItem('bookmarks')) || []
 
+    const data = useSelector((state) => state.bookmarks.data)
+    const token = useSelector((state) => state.auth.token);
     const [searchResult, setSearchResult] = useState('')
 
+    const dispatch = useDispatch()
+    const bookmarkData = [...data]
 
     const resultData = bookmarkData.filter((item) => (
         item.title.toLowerCase().includes(searchResult.toLowerCase())
     ))
+
+    useEffect(() => {
+        dispatch(fetchBookmarks(token))
+    }, [])
+
+    const Card = ({ data }) => {
+
+        const handleDelete = async () => {
+            console.log('MovieId', data.movieId)
+            try {
+                const response = await axios.delete(`${import.meta.env.VITE_SERVER}/bookmark/${data.movieId}`, {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                })
+                const {message} = response.data
+                alert(message)
+                window.location.reload()
+            } catch (error) {
+                console.log('Error:', error.message)
+            }
+
+        }
+
+        return (
+
+            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg ">
+                <img src={data.image} alt={data.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 hover:inset-0 bg-black/50 sm:p-4 p-1 flex flex-col justify-end">
+                    <Link to={`/${data.type}/${data.movieId}`} className='hover:cursor-pointer'>
+                        <h3 className="text-white font-semibold text-sm">{data.title}</h3>
+                    </Link>
+                </div>
+                <FaBookmark className="absolute top-2 right-2 text-white hover:cursor-pointer" onClick={handleDelete} />
+            </div>
+
+        )
+    }
+
 
     return (
         <>
@@ -25,7 +70,7 @@ const BookmarkPage = () => {
                         <Sidebar />
                         {/* Main content */}
                         <main className="flex-1  py-6 space-y-8 pt-10 px-5 sm:px-0 sm:pr-5">
-                            <EmptyBookmark/>
+                            <EmptyBookmark />
                         </main>
                     </div>
                     :

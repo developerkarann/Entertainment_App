@@ -10,7 +10,23 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         require: true
-    }
+    },
+    bookmarks: [
+        {
+            movieId: {
+                type: String
+            },
+            title: {
+                type: String
+            },
+            image: {
+                type: String
+            },
+            type: {
+                type: String
+            }
+        }
+    ]
 })
 
 module.exports = mongoose.model('Users', userSchema)

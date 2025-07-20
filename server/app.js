@@ -4,6 +4,7 @@ const cors = require('cors')
 const userRoutes = require('./routes/userRoutes')
 const moviesRoutes = require('./routes/moviesRoute')
 const seriesRoutes = require('./routes/seriesRoute')
+const bookmarkRoute = require('./routes/bookmarkRoute')
 const cookieParser = require('cookie-parser')
 
 app.use(cors({
@@ -17,6 +18,7 @@ app.use(cookieParser())
 app.use('/api', userRoutes)
 app.use('/api', moviesRoutes)
 app.use('/api', seriesRoutes)
+app.use('/api', bookmarkRoute)
 
 
 module.exports = app
