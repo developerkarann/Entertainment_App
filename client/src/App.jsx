@@ -24,7 +24,7 @@ function App() {
           <Route path='/' element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
           <Route path='/movies' element={<ProtectedRoute><MoviesPage /></ProtectedRoute>} />
           <Route path='/movie/:id' element={<ProtectedRoute><MovieDetails /></ProtectedRoute>} />
-          <Route path='/series/:id' element={<ProtectedLogin><SeriesDetails /></ProtectedLogin>} />
+          <Route path='/series/:id' element={<ProtectedRoute><SeriesDetails /></ProtectedRoute>} />
           <Route path='/series' element={<ProtectedRoute><SeriesPage /></ProtectedRoute>} />
           <Route path='/bookmark' element={<ProtectedRoute><BookmarkPage /></ProtectedRoute>} />
           <Route path='/login' element={<ProtectedLogin><LoginPage /></ProtectedLogin>} />
