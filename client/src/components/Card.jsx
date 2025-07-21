@@ -2,9 +2,8 @@ import React, { useEffect } from 'react'
 import { FaBookmark, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useParams } from 'react-router-dom';
-// import { setBookmark } from '../redux/slices/bookmarksSlice';
-// import { toggleBookmark } from '../redux/slices/bookmarkSlice';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Card = ({ data }) => {
     const token = useSelector((state) => state.auth.token);
@@ -30,10 +29,10 @@ const Card = ({ data }) => {
                 },
             })
             const {message} = response.data
-            alert(message)
-            // console.log('sucess: ', response.data)
+           toast.success(message)
         } catch (error) {
             console.log('Error:', error.message)
+            toast.error(error.message)
         }
 
     }

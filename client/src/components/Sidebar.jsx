@@ -10,7 +10,11 @@ import { logout } from '../redux/slices/authSlice';
 
 
 const Sidebar = () => {
-     const dispatch = useDispatch()
+    const dispatch = useDispatch()
+    const handleLogout = () => {
+        alert('Logged Out!')
+        dispatch(logout())
+    }
     return (
         <>
             <div className="sm:w-32 bg-[#10141E] flex flex-col items-center sm:pt-7 ">
@@ -26,9 +30,9 @@ const Sidebar = () => {
 
                     </div>
                     <div className="bottomSection flex sm:absolute sm:bottom-5">
-                        <div className=" profile sm:mb-2 cursor-pointer" onClick={()=>{ dispatch(logout()) }}>
-                           {/* <Link to="/login"> <BiSolidUserCircle className="text-white sm:text-3xl text-4xl rounded-full" /> </Link>  */}
-                            <BiSolidUserCircle className="text-white sm:text-3xl text-4xl rounded-full"  /> 
+                        <div className=" profile sm:mb-2 cursor-pointer" onClick={ handleLogout }>
+                            {/* <Link to="/login"> <BiSolidUserCircle className="text-white sm:text-3xl text-4xl rounded-full" /> </Link>  */}
+                            <BiSolidUserCircle className="text-white sm:text-3xl text-4xl rounded-full" />
                         </div>
                     </div>
                 </div>

@@ -1,33 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../../redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import {toast} from 'react-toastify'
+
 
 const SignUpPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+
   const handleSignup = async (e) => {
     e.preventDefault();
 
     const email = e.target.email.value
     const password = e.target.password.value
     const cPassword = e.target.cPassword.value
+
     if (cPassword !== password) {
-      return alert('Enter the same Password ❌')
-    }
-    try {
-      const result = await dispatch(registerUser({ email, password })).unwrap();
-      if (result) {
-        alert('Account Created!')
-        navigate('/login')
-      }else{
-        alert('Account Creation Failed...')
-      }
-    } catch (error) {
-      alert(error.message)
+      return alert('Enter the same Password...')
     }
 
+    const response = await axios.post(`${import.meta.env.VITE_SERVER}/createuser`, { email, password })
+    .then((res)=>{
+      toast.success(res.data.message)
+      setTimeout(()=>{
+        navigate('/login')
+      },2000)
+    }).catch((err)=>{
+      toast.error(err.response.data.message)
+    })
   }
 
 

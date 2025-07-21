@@ -5,11 +5,21 @@ const jwt = require('jsonwebtoken')
 exports.createUser = async (req, res, next) => {
     const { email, password } = req.body;
     if (!email || !password) {
-        res.status(400).json({
+        return res.status(400).json({
             success: false,
             message: 'Please enter credentials'
         })
     }
+
+    const userExist = await User.findOne({ email })
+
+    if (userExist) {
+        return res.status(404).json({
+            success: false,
+            message: "User Already Exist"
+        })
+    }
+
     try {
         const hashedPass = await bcrypt.hash(password, 10)
         const user = await User.create({
@@ -19,7 +29,7 @@ exports.createUser = async (req, res, next) => {
 
         res.status(200).json({
             sucess: true,
-            messae: 'Account Created!',
+            message: 'Account Created!',
             user
         })
     } catch (error) {

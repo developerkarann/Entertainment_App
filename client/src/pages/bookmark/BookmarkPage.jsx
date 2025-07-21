@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchBookmarks } from "../../redux/slices/bookmarksSlice";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const BookmarkPage = () => {
 
@@ -35,10 +36,13 @@ const BookmarkPage = () => {
                         Authorization: `${token}`,
                     },
                 })
-                const {message} = response.data
-                alert(message)
-                window.location.reload()
+                const { message } = response.data
+                toast.success(message)
+                setTimeout(() => {
+                    window.location.reload()
+                }, 2000)
             } catch (error) {
+                toast.error(error.message)
                 console.log('Error:', error.message)
             }
 

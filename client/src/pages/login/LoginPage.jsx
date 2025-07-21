@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../redux/slices/authSlice";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const dispatch = useDispatch()
@@ -13,10 +14,10 @@ const LoginPage = () => {
     const password = e.target.password.value
     try {
       const result = await dispatch(loginUser({ email, password })).unwrap();
-      alert('Login Successful!')
+      toast.success('Logged In!')
     } catch (error) {
       console.log('[UI] Login Error ❌', error);
-      alert(error.message)
+      toast.error(error)
     }
 
   }
