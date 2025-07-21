@@ -27,6 +27,7 @@ function App() {
           <Route path='/series/:id' element={<ProtectedRoute><SeriesDetails /></ProtectedRoute>} />
           <Route path='/series' element={<ProtectedRoute><SeriesPage /></ProtectedRoute>} />
           <Route path='/bookmark' element={<ProtectedRoute><BookmarkPage /></ProtectedRoute>} />
+          {/* Authentication  */}
           <Route path='/login' element={<ProtectedLogin><LoginPage /></ProtectedLogin>} />
           <Route path='/signup' element={<ProtectedLogin><SignUpPage /></ProtectedLogin>} />
         </Routes>
